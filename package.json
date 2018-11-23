@@ -1,0 +1,25 @@
+{
+  "name": "appsscript-projects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swillcox93/appsscript-projects.git"
+  },
+  "author": "Scott Wilcox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swillcox93/appsscript-projects/issues"
+  },
+  "homepage": "https://github.com/swillcox93/appsscript-projects#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
