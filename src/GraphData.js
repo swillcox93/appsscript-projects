@@ -94,10 +94,14 @@ exports.GraphData = class {
     row(initial, previous, noise) {
         let init;
         if (initial == null)
-            init = this.userInput;
+            if (previous != null) {
+                init = previous.init * this.doseStep;
+            } else {
+                init = this.userInput;
+            }
         else init = initial;
-        if(previous != null){
-            noise = noise == null ? previous.uniformRandom: noise;
+        if (previous != null) {
+            noise = noise == null ? previous.uniformRandom : noise;
         }
         noise = noise == null ? this.random() : noise;
         return {

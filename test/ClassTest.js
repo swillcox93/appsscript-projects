@@ -73,8 +73,8 @@ describe("Class Structure test", function () {
 
     it("should calculate the second row", function(){
         let gd = calc();
-        let row1 = gd.row(null, null, 0.5264278546);
-        let row2 = gd.row(2.00E-03, row1, 0.824104585);
+        let row1 = gd.row(1.00E-03, null, 0.5264278546);
+        let row2 = gd.row(null, row1, 0.824104585);
         let log10Result = util.truncate(row2.log10d, 1E8);
         let log10Expected = util.truncate(-2.698970004, 1E8);
         assert.equal(log10Result, log10Expected);
@@ -83,7 +83,7 @@ describe("Class Structure test", function () {
         let row2cneExptected = 0.04935199214;
         let roundingError1 = util.truncate(row2cne, 1E2);
         let roundingError2 = util.truncate(row2cneExptected, 1E2);
-        
+
         assert.equal(roundingError1, roundingError2);
         let approx = util.approx(row2cne, row2cneExptected, 0.005);
         assert.equal(approx, true);
