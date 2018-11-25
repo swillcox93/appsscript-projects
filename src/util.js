@@ -1,8 +1,9 @@
 exports.approx = function (a, b, precision) {
     if (precision == null) {
-        epsilon = 0.001;
+        precision = 0.001;
     }
-    return Math.abs(a - b) < epsilon;
+
+    return Math.abs(a - b) < precision;
 };
 
 exports.truncate = function(input, n){

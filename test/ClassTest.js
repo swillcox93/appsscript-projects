@@ -1,6 +1,10 @@
 const gd = require("../src/GraphData");
 const assert = require('assert');
+const chai = require("chai");
 const util = require("../src/util");
+Number.prototype.truncate = function (n) {
+    return Math.floor(this * n) / n;
+};
 describe("Class Structure test", function () {
     const input = 1.00E-03;
     const noiseConst = 0.9928133549;
@@ -51,11 +55,37 @@ describe("Class Structure test", function () {
         let rounding2 = util.truncate(expected, 1E10);
         assert.equal(rounding1, rounding2);
     });
-   it("calculate the combinedNoise and effect", function () {
+    it("calculate the combinedNoise and effect", function () {
         let expected = 0.1192954975;
         let result = calc().combinedNoiseAndEffect(noiseConst);
         let rounding1 = util.truncate(result, 1E10);
         let rounding2 = util.truncate(expected, 1E10);
         assert.equal(rounding1, rounding2);
+    });
+    it("calculate the first row.", function () {
+        let gd = calc();
+        let row1 = gd.row(null, null, 0.5264278546);
+        assert.equal(Math.floor(row1.log10d), -3);
+        let rounding1 = util.truncate(row1.combinedNoiseEffect, 1E10);
+        let rounding2 = util.truncate(0.004316869504, 1E10);
+        assert.equal(rounding1, rounding2);
+    });
+
+    it("should calculate the second row", function(){
+        let gd = calc();
+        let row1 = gd.row(null, null, 0.5264278546);
+        let row2 = gd.row(2.00E-03, row1, 0.824104585);
+        let log10Result = util.truncate(row2.log10d, 1E8);
+        let log10Expected = util.truncate(-2.698970004, 1E8);
+        assert.equal(log10Result, log10Expected);
+
+        let row2cne = row2.combinedNoiseEffect;
+        let row2cneExptected = 0.04935199214;
+        let roundingError1 = util.truncate(row2cne, 1E2);
+        let roundingError2 = util.truncate(row2cneExptected, 1E2);
+        
+        assert.equal(roundingError1, roundingError2);
+        let approx = util.approx(row2cne, row2cneExptected, 0.005);
+        assert.equal(approx, true);
     });
 });

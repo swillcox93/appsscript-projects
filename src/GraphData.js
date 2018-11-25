@@ -17,16 +17,20 @@ exports.GraphData = class {
         this.sumOfMix = sum
     }
 
-    truncate(input, n) {
-        return Math.floor(input * n) / n;
+    log10d(initial) {
+        let init;
+        if (initial == null)
+            init = this.userInput;
+        else init = initial;
+        return Math.log(init) / Math.LN10;
     }
 
-    log10d() {
-        return Math.log(this.userInput) / Math.LN10;
-    }
-
-    relativeEffects() {
-        return this.userInput / (this.userInput + this.eqlbDissl);
+    relativeEffects(initial) {
+        let init;
+        if (initial == null)
+            init = this.userInput;
+        else init = initial;
+        return init / (init + this.eqlbDissl);
     }
 
     random() {
@@ -66,24 +70,48 @@ exports.GraphData = class {
     combinedNoise(noise) {
         let absNoise = this.absoluteNoise(noise);
         let relNoise = this.relativeNoise(noise);
-        return ((absNoise * this.absNoise) + (relNoise * this.relNoise)) / this.sumOfMix;
+        return ((absNoise * this.absNoise) + (relNoise * this.relNoise))
+            / this.sumOfMix;
     }
-    combinedNoiseAndEffect(noise){
+
+    combinedNoiseAndEffect(noise) {
         let cn = this.combinedNoise(noise);
         let effect = this.relativeEffects();
-        return cn+effect;
+        return cn + effect;
     }
+
     a_norminv(x, mu, sig) {
         let xp = Math.abs(0.5 - x);
-
-        let xp_inv = mu + sig * Math.sqrt(-Math.PI * Math.log(1 - 4 * xp * xp) / 2.0);
-
+        let xp_inv = mu + sig *
+            Math.sqrt(-Math.PI * Math.log(1 - 4 * xp * xp) / 2.0);
         if (x >= 0.5) {
             return xp_inv;
         } else {
             return -xp_inv;
         }
+    }
 
+    row(initial, previous, noise) {
+        let init;
+        if (initial == null)
+            init = this.userInput;
+        else init = initial;
+        if(previous != null){
+            noise = noise == null ? previous.uniformRandom: noise;
+        }
+        noise = noise == null ? this.random() : noise;
+        return {
+            init: init,
+            log10d: this.log10d(init),
+            relEffects: this.relativeEffects(init),
+            uniformRandom: noise,
+            noiseAbsolute: this.absoluteNoise(noise),
+            noiseRelative: this.relativeNoise(noise),
+            effectAbsNoise: this.absNoiseAndEffect(noise),
+            effectRelNoise: this.relNoiseAndEffect(noise),
+            combinedNoise: this.combinedNoise(noise),
+            combinedNoiseEffect: this.combinedNoiseAndEffect(noise)
+        };
     }
 };
 
