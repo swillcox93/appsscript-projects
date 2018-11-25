@@ -21,7 +21,7 @@ describe('Basic Mocha String Test', function () {
     it('should return 2', function () {
         assert.equal(calculator(x, y), 2);
     });
-    it('should return 2',5 function () {
+    it('should return 2', function () {
         assert.equal(calculator(x, function (operand) {
             return operand + operand
         }), 2);
