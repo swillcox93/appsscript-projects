@@ -74,9 +74,9 @@ exports.GraphData = class {
             / this.sumOfMix;
     }
 
-    combinedNoiseAndEffect(noise) {
+    combinedNoiseAndEffect(noise, init) {
         let cn = this.combinedNoise(noise);
-        let effect = this.relativeEffects();
+        let effect = this.relativeEffects(init);
         return cn + effect;
     }
 
@@ -114,8 +114,22 @@ exports.GraphData = class {
             effectAbsNoise: this.absNoiseAndEffect(noise),
             effectRelNoise: this.relNoiseAndEffect(noise),
             combinedNoise: this.combinedNoise(noise),
-            combinedNoiseEffect: this.combinedNoiseAndEffect(noise)
+            combinedNoiseEffect: this.combinedNoiseAndEffect(noise, init)
         };
+    }
+
+    rows(n, noises) {
+        let noise1 = (noises == null || noises.length == 0) ?
+            this.random() : noises[0];
+        let row1 = this.row(null, null, noise1);
+        let rows = [row1];
+        for (let i = 1; i < n; i++) {
+            let noise = (noises == null || noises.length < i)
+                ? this.random() : noises[i];
+            rows[i] = this.row(null, rows[rows.length - 1], noise);
+        }
+
+        return rows;
     }
 };
 

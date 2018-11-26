@@ -3,7 +3,7 @@ const assert = require('assert');
 const chai = require("chai");
 const util = require("../src/util");
 Number.prototype.truncate = function (n) {
-    return Math.floor(this * n) / n;
+    return Math.floor(this.valueOf() * n) / n;
 };
 describe("Class Structure test", function () {
     const input = 1.00E-03;
@@ -70,22 +70,42 @@ describe("Class Structure test", function () {
         let rounding2 = util.truncate(0.004316869504, 1E10);
         assert.equal(rounding1, rounding2);
     });
-
     it("should calculate the second row", function(){
         let gd = calc();
-        let row1 = gd.row(1.00E-03, null, 0.5264278546);
+        let row1 = gd.row(null, null, 0.5264278546);
         let row2 = gd.row(null, row1, 0.824104585);
-        let log10Result = util.truncate(row2.log10d, 1E8);
-        let log10Expected = util.truncate(-2.698970004, 1E8);
+        let log10Result = row2.log10d.truncate(1E8);
+        let log10Expected = -2.69897001;
         assert.equal(log10Result, log10Expected);
 
         let row2cne = row2.combinedNoiseEffect;
         let row2cneExptected = 0.04935199214;
-        let roundingError1 = util.truncate(row2cne, 1E2);
-        let roundingError2 = util.truncate(row2cneExptected, 1E2);
+        let roundingError1 = row2cne.truncate(1E2);
+        let roundingError2 = row2cneExptected.truncate(1E2);
 
         assert.equal(roundingError1, roundingError2);
         let approx = util.approx(row2cne, row2cneExptected, 0.005);
         assert.equal(approx, true);
     });
+    it("should generate n rows.", function(){
+        let gd = calc();
+        let randoms = [
+            0.9811126943,
+            0.3039991693,
+            0.6858822804,
+            0.3906031156,
+            0.2754898238,
+            0.01442095415,
+            0.3975748048,
+            0.105357684
+        ];
+        let rows = gd.rows(8, randoms);
+        let row8 = rows[7];
+        console.log(rows)
+        assert.equal(row8.init, 0.128);
+        assert.equal(row8.log10d.truncate(1e10), -0.8927900304);
+        assert.equal(row8.combinedNoise,row8.combinedNoiseEffect)
+        assert.equal(row8.combinedNoiseEffect, 0.1648747939)
+    });
+
 });
