@@ -48,28 +48,28 @@ exports.GraphData = class {
         return this.a_norminv(rand, mu, this.stdDev)
     }
 
-    relativeNoise(noise) {
+    relativeNoise(noise, initial) {
         let rand;
         if (noise == null)
             rand = this.random();
         else {
             rand = noise;
         }
-        let relative = this.relativeEffects() * this.stdDev;
+        let relative = this.relativeEffects(initial) * this.stdDev;
         return this.a_norminv(rand, 0, relative)
     }
 
-    absNoiseAndEffect(noise) {
-        return this.absoluteNoise(noise) + this.relativeEffects()
+    absNoiseAndEffect(noise, initial) {
+        return this.absoluteNoise(noise) + this.relativeEffects(initial)
     }
 
-    relNoiseAndEffect(noise) {
-        return this.relativeNoise(noise) + this.relativeEffects()
+    relNoiseAndEffect(noise, initial) {
+        return this.relativeNoise(noise, initial) + this.relativeEffects(initial)
     }
 
-    combinedNoise(noise) {
+    combinedNoise(noise, initial) {
         let absNoise = this.absoluteNoise(noise);
-        let relNoise = this.relativeNoise(noise);
+        let relNoise = this.relativeNoise(noise, initial);
         return ((absNoise * this.absNoise) + (relNoise * this.relNoise))
             / this.sumOfMix;
     }
@@ -110,10 +110,10 @@ exports.GraphData = class {
             relEffects: this.relativeEffects(init),
             uniformRandom: noise,
             noiseAbsolute: this.absoluteNoise(noise),
-            noiseRelative: this.relativeNoise(noise),
-            effectAbsNoise: this.absNoiseAndEffect(noise),
-            effectRelNoise: this.relNoiseAndEffect(noise),
-            combinedNoise: this.combinedNoise(noise),
+            noiseRelative: this.relativeNoise(noise, init),
+            effectAbsNoise: this.absNoiseAndEffect(noise, init),
+            effectRelNoise: this.relNoiseAndEffect(noise, init),
+            combinedNoise: this.combinedNoise(noise, init),
             combinedNoiseEffect: this.combinedNoiseAndEffect(noise, init)
         };
     }

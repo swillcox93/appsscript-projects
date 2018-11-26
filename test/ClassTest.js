@@ -86,26 +86,8 @@ describe("Class Structure test", function () {
         assert.equal(roundingError1, roundingError2);
         let approx = util.approx(row2cne, row2cneExptected, 0.005);
         assert.equal(approx, true);
+
     });
-    it("should generate n rows.", function(){
-        let gd = calc();
-        let randoms = [
-            0.9811126943,
-            0.3039991693,
-            0.6858822804,
-            0.3906031156,
-            0.2754898238,
-            0.01442095415,
-            0.3975748048,
-            0.105357684
-        ];
-        let rows = gd.rows(8, randoms);
-        let row8 = rows[7];
-        console.log(rows)
-        assert.equal(row8.init, 0.128);
-        assert.equal(row8.log10d.truncate(1e10), -0.8927900304);
-        assert.equal(row8.combinedNoise,row8.combinedNoiseEffect)
-        assert.equal(row8.combinedNoiseEffect, 0.1648747939)
-    });
+
 
 });
