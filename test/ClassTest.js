@@ -121,6 +121,8 @@ describe("Class Structure test", function () {
         console.log(row2);
     });
 
+    
+
     // it("should calculate 3rd row", function(){
     //     let gd = calc();
     //     let row1 = gd.row(1.00E-03, null, 0.5264278546);
