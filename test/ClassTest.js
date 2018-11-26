@@ -62,30 +62,83 @@ describe("Class Structure test", function () {
         let rounding2 = util.truncate(expected, 1E10);
         assert.equal(rounding1, rounding2);
     });
+    // it("calculate the first row.", function () {
+    //     let gd = calc();
+    //     let row1 = gd.row(null, null, 0.5264278546);
+    //     assert.equal(Math.floor(row1.log10d), -3);
+    //     let rounding1 = util.truncate(row1.combinedNoiseEffect, 1E10);
+    //     let rounding2 = util.truncate(0.004316869504, 1E10);
+    //     assert.equal(rounding1, rounding2);
+    //     console.log(row1);
+    // });
     it("calculate the first row.", function () {
         let gd = calc();
-        let row1 = gd.row(null, null, 0.5264278546);
+        let row1 = gd.row(null, null, 0.9928133549);
         assert.equal(Math.floor(row1.log10d), -3);
         let rounding1 = util.truncate(row1.combinedNoiseEffect, 1E10);
-        let rounding2 = util.truncate(0.004316869504, 1E10);
+        let rounding2 = util.truncate(0.1192954975, 1E10);
         assert.equal(rounding1, rounding2);
+        console.log(row1);
     });
+    
+    // it("should calculate the second row", function(){
+    //     let gd = calc();
+    //     let row1 = gd.row(1.00E-03, null, 0.5264278546);
+    //     let row2 = gd.row(null, row1, 0.824104585);
+    //     let log10Result = util.truncate(row2.log10d, 1E8);
+    //     let log10Expected = util.truncate(-2.698970004, 1E8);
+    //     assert.equal(log10Result, log10Expected);
 
+    //     let row2cne = row2.combinedNoiseEffect;
+    //     let row2cneExptected = 0.04935199214;
+    //     let roundingError1 = util.truncate(row2cne, 1E2);
+    //     let roundingError2 = util.truncate(row2cneExptected, 1E2);
+
+    //     assert.equal(roundingError1, roundingError2);
+    //     let approx = util.approx(row2cne, row2cneExptected, 0.005);
+    //     assert.equal(approx, true);
+    //     console.log(row1);
+    //     console.log(row2);
+    // });
+    
     it("should calculate the second row", function(){
         let gd = calc();
-        let row1 = gd.row(1.00E-03, null, 0.5264278546);
-        let row2 = gd.row(null, row1, 0.824104585);
+        let row1 = gd.row(1.00E-03, null, 0.9928133549);
+        let row2 = gd.row(null, row1, 0.6593876434);
         let log10Result = util.truncate(row2.log10d, 1E8);
         let log10Expected = util.truncate(-2.698970004, 1E8);
         assert.equal(log10Result, log10Expected);
 
         let row2cne = row2.combinedNoiseEffect;
-        let row2cneExptected = 0.04935199214;
+        let row2cneExptected = 0.02255071983;
         let roundingError1 = util.truncate(row2cne, 1E2);
         let roundingError2 = util.truncate(row2cneExptected, 1E2);
 
         assert.equal(roundingError1, roundingError2);
         let approx = util.approx(row2cne, row2cneExptected, 0.005);
         assert.equal(approx, true);
+        console.log(row1);
+        console.log(row2);
     });
+
+    // it("should calculate 3rd row", function(){
+    //     let gd = calc();
+    //     let row1 = gd.row(1.00E-03, null, 0.5264278546);
+    //     let row2 = gd.row(null, row1, 0.824104585);
+    //     let row3 = gd.row(null,row2, )
+
+    //     let log10Result = util.truncate(row2.log10d, 1E8);
+    //     let log10Expected = util.truncate(-2.698970004, 1E8);
+    //     assert.equal(log10Result, log10Expected);
+
+    //     let row2cne = row2.combinedNoiseEffect;
+    //     let row2cneExptected = 0.04935199214;
+    //     let roundingError1 = util.truncate(row2cne, 1E2);
+    //     let roundingError2 = util.truncate(row2cneExptected, 1E2);
+
+    //     assert.equal(roundingError1, roundingError2);
+    //     let approx = util.approx(row2cne, row2cneExptected, 0.005);
+    //     assert.equal(approx, true);
+    //     console.log(row2);
+    // });
 });
