@@ -128,7 +128,6 @@ exports.GraphData = class {
                 ? this.random() : noises[i];
             rows[i] = this.row(null, rows[rows.length - 1], noise);
         }
-
         return rows;
     }
 };
