@@ -1,6 +1,6 @@
 const assert = require('assert');
 const chai = require("chai");
-const approx = require("../src/util").approx;
+const approx = require("../../src/util").approx;
 
 describe("Approximation tests", function () {
     describe("Suite to test accuracy as Integer range.", function () {

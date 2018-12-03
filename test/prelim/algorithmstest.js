@@ -13,7 +13,7 @@ function calculator(x, y) {
 var passable = function (operand) {
     return operand + operand;
 }
-var trap = passable
+var trap = passable;
 describe('Basic Mocha String Test', function () {
     it('should return 2', function () {
         assert.equal(y(x), 2);
