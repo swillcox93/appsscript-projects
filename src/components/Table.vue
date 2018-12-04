@@ -36,7 +36,7 @@
       provider() {
         return new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(this.rows);
       }
-    }
+    }  
   }
 </script>
 
