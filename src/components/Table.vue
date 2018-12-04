@@ -18,22 +18,23 @@
   // import 'bootstrap-vue/dist/bootstrap-vue.css'
   let gd = new GraphData(1.00E-03, 1, 1, 2, 0.1, 0.5, 0.5, 1);
 
-  function provider(input) {
-    return new GraphData(input, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(8);
-  }
+  // function provider(input) {
+  //   return new GraphData(input, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(8);
+  // }
 
   console.log(gd);
   export default {
 
     data(){
       return {
-        uinput: 1E-3
+        uinput: 1E-3,
+        rows: 8
       }
     },
 
     computed: {
-      provider(i) {
-        return new GraphData(i, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(8);
+      provider() {
+        return new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(this.rows);
       }
     }
   }
