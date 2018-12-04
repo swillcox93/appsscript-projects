@@ -1,7 +1,7 @@
 const gd = require("../../src/GraphData");
 const assert = require('assert');
 const chai = require("chai");
-const approx = require("../../src/util").approx;
+const approx = require("../../src/lib/util").approx;
 Number.prototype.truncate = function (n) {
     return Math.floor(this.valueOf() * n) / n;
 };

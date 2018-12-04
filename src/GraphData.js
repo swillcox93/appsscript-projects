@@ -1,4 +1,4 @@
-class GraphData {
+exports.GraphData=class{
     constructor(input,
                 massEffect,
                 eqlbDissl,
@@ -130,8 +130,4 @@ class GraphData {
         }
         return rows;
     }
-}
-
-export default{
-  GraphData: GraphData
 }
