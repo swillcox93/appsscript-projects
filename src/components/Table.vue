@@ -28,7 +28,7 @@
   }
 
   body {
-    width: 80%; 
+    width: 80%;
     position: relative;
   }
 

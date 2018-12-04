@@ -131,4 +131,3 @@ exports.GraphData = class {
         return rows;
     }
 };
-
