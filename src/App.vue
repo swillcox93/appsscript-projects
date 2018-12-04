@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <h1>Basic Pharmalogical Equations</h1>
     <router-link to="/table">About</router-link>
     <router-view/>
   </div>

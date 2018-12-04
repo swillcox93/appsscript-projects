@@ -1,6 +1,5 @@
 <template>
   <div class="table">
-    <h1>Hello</h1>
     <b-table class="td" striped hover :items="tableData"></b-table>
   </div>
 </template>
@@ -15,7 +14,7 @@
     name: "Table",
     data() {
       return {
-        tableData: gd.rows(20)
+        tableData: gd.rows(7)
 
       };
     }
