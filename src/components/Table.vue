@@ -1,6 +1,14 @@
 <template>
   <div class="table">
-    <b-table class="td" striped hover :items="tableData"></b-table>
+    <form>
+      <label for="uinput">input</label>
+      <input id="uinput" step="1E-1" type="number" v-model="uinput"/>
+      <label for="rows">rows</label>
+      <input id="rows" type="number" v-model="rows"/>
+
+    </form>
+
+    <b-table class="td" striped hover :items="provider"></b-table>
   </div>
 </template>
 
@@ -9,14 +17,24 @@
   // import 'bootstrap/dist/css/bootstrap.css'
   // import 'bootstrap-vue/dist/bootstrap-vue.css'
   let gd = new GraphData(1.00E-03, 1, 1, 2, 0.1, 0.5, 0.5, 1);
+
+  function provider(input) {
+    return new GraphData(input, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(8);
+  }
+
   console.log(gd);
   export default {
-    name: "Table",
-    data() {
-      return {
-        tableData: gd.rows(7)
 
-      };
+    data(){
+      return {
+        uinput: 1E-3
+      }
+    },
+
+    computed: {
+      provider(i) {
+        return new GraphData(i, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(8);
+      }
     }
   }
 </script>
