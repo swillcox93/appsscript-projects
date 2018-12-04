@@ -6,10 +6,10 @@
 </template>
 
 <script>
-  import GraphData from "../GraphData";
+  import {GraphData} from "../lib/GraphData";
   // import 'bootstrap/dist/css/bootstrap.css'
   // import 'bootstrap-vue/dist/bootstrap-vue.css'
-  let gd = new GraphData.GraphData(1.00E-03, 1, 1, 2, 0.1, 0.5, 0.5, 1);
+  let gd = new GraphData(1.00E-03, 1, 1, 2, 0.1, 0.5, 0.5, 1);
   console.log(gd);
   export default {
     name: "Table",
