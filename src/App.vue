@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Basic Pharmalogical Equations</h1>
-    <router-link to="/table">About</router-link>
+    <router-link to="/table">Table</router-link>
     <router-view/>
   </div>
 </template>

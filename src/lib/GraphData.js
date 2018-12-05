@@ -103,8 +103,14 @@ export class GraphData{
         if (previous != null) {
             noise = noise == null ? previous.uniformRandom : noise;
         }
+        //same thing as 
         noise = noise == null ? this.random() : noise;
-        return {
+        if(noise == null){
+            noise = this.random()
+        }else{
+            noise = noise
+        }
+        let objectdata = {
             init: init,
             log10d: this.log10d(init),
             relEffects: this.relativeEffects(init),
@@ -116,6 +122,7 @@ export class GraphData{
             combinedNoise: this.combinedNoise(noise, init),
             combinedNoiseEffect: this.combinedNoiseAndEffect(noise, init)
         };
+        return objectdata
     }
 
     rows(n, noises) {
