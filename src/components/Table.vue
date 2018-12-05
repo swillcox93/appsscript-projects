@@ -5,7 +5,7 @@
       <input id="uinput" step="1E-1" type="number" v-model="uinput"/>
       <label for="rows">rows</label>
       <input id="rows" type="number" v-model="rows"/>
-
+      <!-- put textfield here -->
     </form>
 
     <b-table class="td" striped hover :items="provider"></b-table>
@@ -23,6 +23,16 @@
   // }
 
   console.log(gd);
+     const randoms = [
+              0.33599008,
+              0.7254017357,
+              0.538389962,
+              0.9808202199,
+              0.2957488929,
+              0.8504724979,
+              0.1857151908,
+              0.9443163872,
+          ];
   export default {
 
     data(){
@@ -34,9 +44,10 @@
 
     computed: {
       provider() {
-        return new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(this.rows);
+        return new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1)
+          .rows(this.rows, randoms);
       }
-    }  
+    }
   }
 </script>
 
