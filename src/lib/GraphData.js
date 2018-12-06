@@ -1,12 +1,12 @@
-export class GraphData{
+export class GraphData {
     constructor(input,
-                massEffect,
-                eqlbDissl,
-                doseStep,
-                stdDev,
-                absNoise,
-                relNoise,
-                sum) {
+        massEffect,
+        eqlbDissl,
+        doseStep,
+        stdDev,
+        absNoise,
+        relNoise,
+        sum) {
         this.userInput = input;
         this.massEffect = massEffect;
         this.eqlbDissl = eqlbDissl;
@@ -105,6 +105,7 @@ export class GraphData{
         }
         noise = noise == null ? this.random() : noise;
         return {
+            row: previous == null ? 0 : previous.row + 1,
             init: init,
             log10d: this.log10d(init),
             relEffects: this.relativeEffects(init),
