@@ -1,12 +1,24 @@
 <template>
   <div class="table">
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col>
+          <b-form>
+            <b-form-input id="exampleInput2" type="text" required placeholder="Initial dose"></b-form-input>
+            <b-form-textarea></b-form-textarea>
+          </b-form>
+        </b-col>
+      </b-row>
+    </b-container>
     <form>
       <label for="uinput">input</label>
       <input id="uinput" step="1E-1" type="number" v-model="uinput"/>
       <label for="rows">rows</label>
+
       <input id="rows" type="number" v-model="rows"/>
       <!--TextArea-->
       <textarea id="noiseArr" v-model="noiseArr"></textarea>
+
 
     </form>
 
@@ -38,22 +50,22 @@
 </script>
 
 <style scoped>
-  html {
-    width: 100%
-  }
+html {
+  width: 100%;
+}
 
-  body {
-    width: 80%;
-    position: relative;
-  }
+body {
+  width: 80%;
+  position: relative;
+}
 
-  .table {
-    max-width: 80%;
-    position: relative;
-  }
+.table {
+  max-width: 80%;
+  position: relative;
+}
 
-  .td {
-    max-width: 100%;
-    position: relative;
-  }
+.td {
+  max-width: 100%;
+  position: relative;
+}
 </style>
