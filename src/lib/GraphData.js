@@ -119,7 +119,6 @@ export class GraphData {
             combinedNoise: this.combinedNoise(noise, init),
             combinedNoiseEffect: this.combinedNoiseAndEffect(noise, init)
         };
-        return objectdata
     }
 
     rows(n, noises) {

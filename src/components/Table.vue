@@ -1,71 +1,187 @@
 <template>
-  <div class="table">
-    <b-container class="bv-example-row">
-      <b-row>
-        <b-col>
-          <b-form>
-            <b-form-input id="exampleInput2" type="text" required placeholder="Initial dose"></b-form-input>
-            <b-form-textarea></b-form-textarea>
+  <div>
+    <b-container class="container" fluid>
+      <b-row class="container">
+        <b-col id="left" cols="3">
+          <b-form class="bform">
+            <b-form-input
+              class="bform"
+              input
+              id="uinput"
+              step="1E-1"
+              type="number"
+              v-model="uinput"
+              required
+              placeholder="Initial dose"
+            ></b-form-input>
+            <b-form-input
+              class="bform"
+              id="rows"
+              type="number"
+              v-model="rows"
+              required
+              placeholder="Initial dose"
+            ></b-form-input>
+            <b-form-textarea class="bform" id="noiseArr" v-model="noiseArr"></b-form-textarea>
+            <b-button @click="showModal">View Graphs</b-button>
           </b-form>
+        </b-col>
+        <b-col id="right" cols="9">
+          <div class="table">
+            <b-table class="td" striped hover :items="provider"></b-table>
+          </div>
         </b-col>
       </b-row>
     </b-container>
-    <form>
-      <label for="uinput">input</label>
-      <input id="uinput" step="1E-1" type="number" v-model="uinput"/>
-      <label for="rows">rows</label>
-
-      <input id="rows" type="number" v-model="rows"/>
-      <!--TextArea-->
-      <textarea id="noiseArr" v-model="noiseArr"></textarea>
-
-
-    </form>
-
-    <b-table class="td" striped hover :items="provider"></b-table>
+    <b-modal ref="myModalRef" hide-footer title="Using Component Methods">
+      <p class="my-4">Welcome to Scotts Graphs, home of the Scotts graph.</p>
+      <canvas id="chart"></canvas>
+    </b-modal>
   </div>
 </template>
 
 <script>
-  import {GraphData} from "@/lib/GraphData";
-
-  console.log(GraphData);
-  export default {
-
-    data(){
-      return {
-        uinput: 1E-3,
-        rows: 8,
-        noiseArr: Math.random()+""
-      }
-    },  
-
-    computed: {
-      provider() {
-        return new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(this.rows, this.noiseArr.split("\n"));
-
-      }
-    }  
+import { GraphData } from "@/lib/GraphData";
+import Chart from "chart.js";
+import _ from "lodash";
+export default {
+  data() {
+    return {
+      uinput: 1e-3,
+      rows: 20,
+      noiseArr: [
+        0.33599008,
+        0.7254017357,
+        0.538389962,
+        0.9808202199,
+        0.2957488929,
+        0.8504724979,
+        0.1857151908,
+        0.9443163872,
+        0.006625569728,
+        0.9712317865,
+        0.0456936755,
+        0.03441390119,
+        0.1113148953,
+        0.2582445355,
+        0.7389413603,
+        0.9393672408,
+        0.6785066161,
+        0.8744979777,
+        0.2052015907,
+        0.2979287541,
+        0.6700029061,
+        0.3647094993,
+        0.4813643429,
+        0.1404884197,
+        0.3353435382
+      ].toString()
+    };
+  },
+  methods: {
+    showModal() {
+      this.$refs.myModalRef.show();
+      this.doCharts();
+    },
+    hideModal() {
+      this.$refs.myModalRef.hide();
+    },
+    doCharts() {
+      const chart = document.getElementById("chart");
+      const graph = new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(
+        this.rows,
+        this.noiseArr.split(",")
+      );
+      let rels = _.map(graph, "relEffects")
+      const myChart = new Chart(chart, {
+        type: "line",
+        data: {
+          labels: " ".repeat(rels.length).split(" ") ,
+          datasets: [
+            {
+              // one line graph
+              label: "rel effect g's",
+              data: rels,
+              backgroundColor: [
+                "rgba(54,73,93,.5)", // Blue
+                "rgba(54,73,93,.5)",
+                "rgba(54,73,93,.5)",
+                "rgba(54,73,93,.5)",
+                "rgba(54,73,93,.5)",
+                "rgba(54,73,93,.5)",
+                "rgba(54,73,93,.5)",
+                "rgba(54,73,93,.5)"
+              ],
+              borderColor: [
+                "#36495d",
+                "#36495d",
+                "#36495d",
+                "#36495d",
+                "#36495d",
+                "#36495d",
+                "#36495d",
+                "#36495d"
+              ],
+              borderWidth: 3
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          lineTension: 1,
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  padding: 5
+                }
+              }
+            ],
+            xAxis: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 1,
+                  padding: 0
+                }
+              }
+            ]
+          }
+        }
+      });
+      console.log(rels)
+    }
+  },
+  computed: {
+    provider() {
+      return new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(
+        this.rows,
+        this.noiseArr.split(",")
+      );
+    }
   }
+};
 </script>
 
 <style scoped>
-html {
-  width: 100%;
+.container {
+  padding: 0;
+  margin: 0;
+  position: relative;
 }
-
 body {
-  width: 80%;
-  position: relative;
+  overflow: hidden;
 }
-
 .table {
-  max-width: 80%;
-  position: relative;
 }
-
-.td {
-  max-width: 100%;
+#noiseArr {
+  height: 200px;
+}
+#right {
+  width: 100;
   position: relative;
 }
 </style>
