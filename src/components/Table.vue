@@ -27,16 +27,26 @@
           </b-form>
         </b-col>
         <b-col id="right" cols="9">
-          <div class="table">
-            <b-table class="td" striped hover :items="provider"></b-table>
-          </div>
+          <b-tabs>
+            <b-tab title="graph">
+              <div class="table">
+                <b-table class="td" striped hover :items="provider"></b-table>
+              </div>
+            </b-tab>
+            <b-tab title="charts">
+              <div class="table" ref="myModalRef">
+                <h1 class="my-4">Welcome to Scotts Graphs</h1>
+                <h2>home of the Scotts graph.</h2>
+                <canvas id="chart"></canvas>
+              </div>
+              <div class="container">
+                <line-chart v-if="loaded" :chartdata="chartdata" :options="options"/>
+              </div>
+            </b-tab>
+          </b-tabs>
         </b-col>
       </b-row>
     </b-container>
-    <b-modal ref="myModalRef" hide-footer title="Using Component Methods">
-      <p class="my-4">Welcome to Scotts Graphs, home of the Scotts graph.</p>
-      <canvas id="chart"></canvas>
-    </b-modal>
   </div>
 </template>
 
@@ -80,23 +90,19 @@ export default {
   },
   methods: {
     showModal() {
-      this.$refs.myModalRef.show();
       this.doCharts();
-    },
-    hideModal() {
-      this.$refs.myModalRef.hide();
     },
     doCharts() {
       const chart = document.getElementById("chart");
       const graph = new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(
         this.rows,
-        this.noiseArr.split(",")
+        this.noiseArr.replace("\n", "").split(",")
       );
-      let rels = _.map(graph, "relEffects")
+      let rels = _.map(graph, "relEffects");
       const myChart = new Chart(chart, {
         type: "line",
         data: {
-          labels: " ".repeat(rels.length).split(" ") ,
+          labels: " ".repeat(rels.length).split(" "),
           datasets: [
             {
               // one line graph
@@ -152,8 +158,10 @@ export default {
           }
         }
       });
-      console.log(rels)
     }
+  },
+  mounted() {
+    this.renderChart(this.chartdata, this.options);
   },
   computed: {
     provider() {
@@ -175,8 +183,7 @@ export default {
 body {
   overflow: hidden;
 }
-.table {
-}
+
 #noiseArr {
   height: 200px;
 }
