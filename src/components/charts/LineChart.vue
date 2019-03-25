@@ -15,6 +15,26 @@ export default {
       return this.dc;
     }
   },
+  scales: {
+    xAxes: [
+      {
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: "Log10d"
+        }
+      }
+    ],
+    yAxes: [
+      {
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: "Response"
+        }
+      }
+    ]
+  },
   methods: {
     renderLineChart: function() {
       console.log("Rendering chart");
@@ -24,7 +44,12 @@ export default {
           datasets: [
             {
               label: "Data One",
-              backgroundColor: "#f87979",
+              backgroundColor: "rgba(255, 100, 55, 0.2)",
+              data: this.chartData
+            },
+            {
+              label: "Data One",
+              backgroundColor: "rgba(255, 100, 55, 0.2)",
               data: this.chartData
             }
           ]

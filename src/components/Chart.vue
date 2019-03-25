@@ -2,14 +2,14 @@
   <div class="small">
     <b-container class="container" fluid>
       <b-row class="container">
-        <!-- <b-col id="left" cols="3">
+        <b-col id="left" cols="3">
           <b-form class="bform">
             <h6>Data Set</h6>
             <p>Please enter your datapoints, seperated by commas</p>
             <b-form-textarea class="bform" id="userdata" v-model="userdata"></b-form-textarea>
-            <b-button @click="render">View Graphs</b-button>
+            <b-button @click="changeData">View Graphs</b-button>
           </b-form>
-        </b-col>-->
+        </b-col>
         <b-col id="right" cols="9">
           <b-tabs>
             <b-tab title="graph">
@@ -81,6 +81,7 @@ export default {
   data() {
     return {
       message: "Hello World",
+      userdata: "",
       dataChart: [10, 39, 10, 40, 39, 0, 0],
       test: [4, 4, 4, 4, 4, 4]
     };
@@ -88,7 +89,7 @@ export default {
   methods: {
     changeData: function() {
       console.log("Changing data")
-      this.dataChart = [6, 6];
+      this.dataChart = this.userdata.replace(/\s/g,'').split(",")
       // this.renderLineChart()
     }
   }
