@@ -2,6 +2,7 @@
   <div id="app">
     <h1>Basic Pharmalogical Equations</h1>
     <router-link to="/table">Table</router-link>
+    <router-link to="/chart">Chart</router-link>
     <router-view/>
   </div>
 </template>
