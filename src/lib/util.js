@@ -1,14 +1,40 @@
-exports.approx = function (a, b, precision) {
-    if (precision == null) {
-        precision = 0.001;
-    }
-    // console.log("a is: ["+a+"]");
-    // console.log("b is: ["+b+"]");
-    // console.log("diff is: ["+Math.abs(a - b) < precision+"]");
-
-    return Math.abs(a - b) < precision;
+exports.approx = function(a, b, precision) {
+  if (precision == null) {
+    precision = 0.001;
+  }
+  return Math.abs(a - b) < precision;
 };
 
-exports.truncate = function(input, n){
-    return Math.floor(input * n) / n;
+exports.truncate = function(input, n) {
+  return Math.floor(input * n) / n;
+};
+
+exports.noises = function() {
+  [
+    0.33599008,
+    0.7254017357,
+    0.538389962,
+    0.9808202199,
+    0.2957488929,
+    0.8504724979,
+    0.1857151908,
+    0.9443163872,
+    0.006625569728,
+    0.9712317865,
+    0.0456936755,
+    0.03441390119,
+    0.1113148953,
+    0.2582445355,
+    0.7389413603,
+    0.9393672408,
+    0.6785066161,
+    0.8744979777,
+    0.2052015907,
+    0.2979287541,
+    0.6700029061,
+    0.3647094993,
+    0.4813643429,
+    0.1404884197,
+    0.3353435382
+  ];
 };

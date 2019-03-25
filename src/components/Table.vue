@@ -99,65 +99,6 @@ export default {
         this.noiseArr.replace("\n", "").split(",")
       );
       let rels = _.map(graph, "relEffects");
-      const myChart = new Chart(chart, {
-        type: "line",
-        data: {
-          labels: " ".repeat(rels.length).split(" "),
-          datasets: [
-            {
-              // one line graph
-              label: "rel effect g's",
-              data: rels,
-              backgroundColor: [
-                "rgba(54,73,93,.5)", // Blue
-                "rgba(54,73,93,.5)",
-                "rgba(54,73,93,.5)",
-                "rgba(54,73,93,.5)",
-                "rgba(54,73,93,.5)",
-                "rgba(54,73,93,.5)",
-                "rgba(54,73,93,.5)",
-                "rgba(54,73,93,.5)"
-              ],
-              borderColor: [
-                "#36495d",
-                "#36495d",
-                "#36495d",
-                "#36495d",
-                "#36495d",
-                "#36495d",
-                "#36495d",
-                "#36495d"
-              ],
-              borderWidth: 3
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          lineTension: 1,
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  min: 0,
-                  padding: 5
-                }
-              }
-            ],
-            xAxis: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  min: 0,
-                  max: 1,
-                  padding: 0
-                }
-              }
-            ]
-          }
-        }
-      });
     }
   },
   mounted() {
