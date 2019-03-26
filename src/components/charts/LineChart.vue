@@ -49,8 +49,8 @@ export default {
             },
             {
               label: "Data One",
-              backgroundColor: "rgba(255, 100, 55, 0.2)",
-              data: this.chartData
+              backgroundColor: "rgba(76, 100, 233, 0.2)",
+              data: this.defaultData
             }
           ]
         },

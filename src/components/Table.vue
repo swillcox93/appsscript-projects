@@ -52,7 +52,7 @@
 
 <script>
 import { GraphData } from "@/lib/GraphData";
-import Chart from "chart.js";
+
 import _ from "lodash";
 export default {
   data() {
