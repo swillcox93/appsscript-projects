@@ -6,7 +6,7 @@ const { reactiveProp } = mixins;
 
 export default {
   extends: Line,
-  props: ["dc", "options", "dd"],
+  props: ["ddc", "options", "dd"],
   mounted() {
     this.renderLineChart();
   },
@@ -15,8 +15,8 @@ export default {
       return this.dc;
     },
 
-    defaultData: function() {
-      return this.dd;
+    defaultData: function(){
+      return this.dd
     }
   },
   scales: {
@@ -41,20 +41,14 @@ export default {
   },
   methods: {
     renderLineChart: function() {
-      console.log("Dat is" + this.dd);
+      console.log("Dat is"+this.defaultData)
       return this.renderChart(
         {
-          labels: this.dd,
+          labels: this.ddc,
           datasets: [
             {
-              label: "Reference",
-              backgroundColor: "rgba(255, 100, 55, 0.2)",
-              data: this.dc
-            },
-            {
-              label: "Your Graph",
               backgroundColor: "rgba(76, 100, 233, 0.2)",
-              data: this.dd
+              data: this.ddc
             }
           ]
         },
@@ -64,11 +58,6 @@ export default {
   },
   watch: {
     dc: function() {
-      this.$data._chart.destroy();
-      //this.renderChart(this.data, this.options);
-      this.renderLineChart();
-    },
-    dd: function() {
       this.$data._chart.destroy();
       //this.renderChart(this.data, this.options);
       this.renderLineChart();

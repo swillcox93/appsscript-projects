@@ -3,15 +3,17 @@
     <b-tab title="generate" class="tab">
       <b-container class="container" fluid>
         <b-row>
-          <b-col id="left" cols="3">
+          <b-col id="left" cols="5">
             <b-form class="bform">
               <label for="uinput">
                 <h5>10⁻³ml Noradrenaline added</h5>
                 <b-input type="text" name="uinput" id="uinput" v-model="uinput"/>
               </label>
             </b-form>
+            <b-button @click="changeData">View Graphs</b-button>
+            <line-chart :dd="defaultData"></line-chart>
           </b-col>
-          <b-col id="right" cols="9">
+          <b-col id="right" cols="5">
             <div class="table" ref="myModalRef">
               <h2>Generated Traces for Noradrenaline</h2>
             </div>
@@ -28,6 +30,10 @@
           <b-col id="left" cols="3">
             <b-form class="bform">
               <h6>Data Set</h6>
+              <label for="uinput">
+                <h5>10⁻³ml Noradrenaline added</h5>
+                <b-input type="text" name="uinput" id="uinput" v-model="uinput"/>
+              </label>
               <p>Please enter your datapoints, seperated by commas</p>
               <b-form-textarea class="bform" id="userdata" v-model="userdata"></b-form-textarea>
               <b-button @click="changeData">View Graphs</b-button>
@@ -38,7 +44,7 @@
               <h2>home of the Scotts graph.</h2>
             </div>
             <div class="container">
-              <line-chart :dc="dataChart"></line-chart>
+              <line-chart :dc="dataChart" :dd="defaultData"></line-chart>
             </div>
           </b-col>
         </b-row>
@@ -49,6 +55,8 @@
 
 <script>
 import LineChart from "./charts/LineChart.vue";
+import SingleLineChart from "./charts/SingleLineChart.vue";
+
 import { GraphData } from "@/lib/GraphData";
 let noises = [
   0.33599008,
@@ -79,7 +87,7 @@ let noises = [
 ];
 
 console.log(noises);
-let gr = new GraphData(0.03, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(20, noises);
+let gr = new GraphData(0.003, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(20, noises);
 let t = _.map(gr, "relEffects");
 console.log(t);
 export default {
@@ -92,7 +100,7 @@ export default {
       userdata: "",
       rows: 15,
       uinput: 1e-3,
-      dataChart: [0.1, 0.2, 0.3],
+      dataChart: [],
       test: [4, 4, 4, 4, 4, 4],
       defaultData: t
     };
@@ -101,6 +109,11 @@ export default {
     changeData: function() {
       console.log("Changing data");
       this.dataChart = this.userdata.replace(/\s/g, "").split(",");
+      let gr2 = new GraphData(this.uinput, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(
+        20,
+        noises
+      );
+      this.defaultData = _.map(gr2, "relEffects");
       // this.renderLineChart()
     }
   },
@@ -126,7 +139,7 @@ export default {
   width: 100%;
 }
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 #userdata {

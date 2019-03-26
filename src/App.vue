@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <h1>Basic Pharmalogical Equations</h1>
-    <router-link to="/table">Table</router-link>
-    <router-link to="/chart">Chart</router-link>
+    <h1>Norodrenaline Effects Visualizer</h1>
+    <router-link to="/chart">Try Now</router-link>
     <router-view/>
   </div>
 </template>
