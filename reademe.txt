@@ -1,0 +1,35 @@
+Node application developed in  Vue
+  - Node is a server which executes javascript code
+  - Vue is a framework for building single page javascript apps
+  - Vue apps are built as individual components which are built
+    into a single application.
+      - the build process uses Webpack, which compresses all files
+        into a single one which the browser can execute
+  - the table is reactive, and upates automatically
+    - we use vue properties which alert subscribers
+      of any changes to their value.
+  - the graphs must be triggered by clicking buttons.
+
+Dependencies are managed with NPM - the node package manager.
+
+Most important dependency are chartjs and its wrapper vue-chartjs
+  - implemented in LineChart.js
+  - custom graph with two datasets, one standardized theoretical and
+    one based on user provided data
+
+Unit tests allow testing outside of the browser.
+The app uses Jest for unit tests.
+Jest has descriptice assertions.
+  - in particular we use the assetion "expect(x).toBeCloseTo(y)"
+    - this is useful because the table data are decimal values,
+      we only need accuracy with within a couple of major decimal points.
+
+Our unit tests do not cover application code
+  - application code is that which we see as the end result
+  - this would require automation testing (time consuming, not very effective)
+
+TODO:
+remove .git
+create a new one
+ctrl-h in explorer will reveal hidden files
+
