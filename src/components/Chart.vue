@@ -65,9 +65,8 @@
 
 <script>
 import LineChart from "./charts/LineChart.vue";
-import SingleLineChart from "./charts/SingleLineChart.vue";
-
 import { GraphData } from "@/lib/GraphData";
+import _ from "lodash";
 let noises = [
   0.33599008,
   0.7254017357,
