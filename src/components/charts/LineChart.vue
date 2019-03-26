@@ -47,12 +47,12 @@ export default {
           labels: this.dd,
           datasets: [
             {
-              label: "Reference",
+              label: "Theoretical",
               backgroundColor: "rgba(255, 100, 55, 0.2)",
               data: this.dc
             },
             {
-              label: "Your Graph",
+              label: "Actual",
               backgroundColor: "rgba(76, 100, 233, 0.2)",
               data: this.dd
             }

@@ -5,13 +5,23 @@
         <b-row>
           <b-col id="left" cols="5">
             <b-form class="bform">
-              <label for="uinput">
+              <label for="uinput" v-tooltip="'Enter the ammount of noradrenaline used'">
                 <h5>10⁻³ml Noradrenaline added</h5>
-                <b-input type="text" name="uinput" id="uinput" v-model="uinput"/>
+                <b-input
+                  type="text"
+                  name="uinput"
+                  id="uinput"
+                  v-model="uinput"
+                  v-tooltip="'Volume of noradrenaline'"
+                />
               </label>
             </b-form>
             <b-button @click="changeData">View Graphs</b-button>
             <line-chart :dd="defaultData"></line-chart>
+            <p>
+              Compared to the theoretical dose-response curve are your plot points
+              are adequate?
+            </p>
           </b-col>
           <b-col id="right" cols="5">
             <div class="table" ref="myModalRef">
@@ -87,7 +97,7 @@ let noises = [
 ];
 
 console.log(noises);
-let gr = new GraphData(0.003, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(20, noises);
+let gr = new GraphData(1e-3, 1, 1, 2, 0.1, 0.5, 0.5, 1).rows(20, noises);
 let t = _.map(gr, "relEffects");
 console.log(t);
 export default {
